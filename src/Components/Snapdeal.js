@@ -6,7 +6,7 @@ function Snapdeal() {
 
   async function submit() {
     try {
-      let output = await fetch("http://localhost:5000/snapdeal")
+      let output = await fetch("https://webscrapbackend.herokuapp.com/snapdeal")
         .then((res) => res.json())
         .then((data) => {
           setState({ result: data });
