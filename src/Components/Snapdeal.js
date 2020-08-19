@@ -1,44 +1,45 @@
 import React, { useState } from "react";
 
+
 function Snapdeal() {
-    const [state, setState] = useState([])
+  const [state, setState] = useState({ result: [""] });
+
   async function submit() {
     try {
       let output = await fetch("http://localhost:5000/snapdeal")
         .then((res) => res.json())
         .then((data) => {
-          let array = [];
-          let value = data.map((el) => {
-            if (el.title) {
-              var a = el.title;
-              var b = el.price;
-              var c = el.rating;
-              var d = el.discount;
-              var e = el.image;
-              for (var i = 0; i < a.length; i++) {
-                array.push([a[i], b[i], c[i], d[i], e[i]]);                
-              }
-            }
-            return array
-          });
-          value[0].forEach(element => {
-            // console.log("items :",element)
-            setState(...state,element)
-          });
+          setState({ result: data });
+          console.log(data)
         });
     } catch (err) {
       console.log(err);
     }
   }
 
-  console.log("state:",state)
+  console.log("state:", state);
 
   return (
     <div>
       <button type="button" onClick={submit}>
         Load Data
       </button>
-    </div>
+        {state.result.map((item, i) => {
+          // return <div>{item[0]}</div>;
+          return (
+              <div className="card" style={{ width: "300px" }}>
+                <img style={{ width: "100px",height:"100px" }} src={item[4]}  alt=""/>
+                <div className="card-body">
+                  <h5 className="card-title">Item : {item[0]}</h5>
+                  <p className="card-text">Price: {item[1]}</p>
+                  <p className="card-text">No of People Bought : {item[2]}</p>
+                  <p className="card-text">Discount: {item[3]}</p>
+
+                </div>
+              </div>
+          )
+        })}
+    </div >
   );
 }
 

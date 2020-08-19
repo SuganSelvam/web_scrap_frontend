@@ -5,6 +5,8 @@ import Navbar from "./Components/Navbar";
 import Snapdeal from "./Components/Snapdeal"
 import Amazon from "./Components/Amazon"
 
+import "bootstrap/dist/css/bootstrap.css";
+
 function App() {
   return (
     <div>
